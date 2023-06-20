@@ -1,13 +1,36 @@
 <!DOCTYPE html >
   <style>
-    li, span {
+    li {
       cursor: pointer;
+    }
+    span {
+      cursor: pointer;
+      color: lightslategray;
+    }
+    span:hover {
+      color: slateblue;
+    }
+    p {
+      margin: 10px;
+      width: 150px;
+    }
+    h4 {
+      font-weight: 300;
+    }
+    #head-records {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      max-width: 900px;
+      font-weight: 700;
     }
     .filas {
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
-      max-width: 700px;
+      flex-wrap: wrap;
+      max-width: 900px;
     }
   </style>
 
@@ -26,9 +49,15 @@
         <li onclick="sortByProperty(people, 'Status')">Sort All Records by Status</li>
         <li onclick="filterRecordsByActive()">Filtered Records by Active Status</li>
       </ul>
-    
     </div>
 
+    <div id="head-records">
+      <p>Name</p>
+      <p>Date</p>
+      <p>Favorite Food</p>
+      <p>Favorite Movie</p>
+      <p>Status</p>
+    </div>
     <div id="sorted-records-list"></div>
 
       <script>
@@ -134,10 +163,11 @@
           objects.forEach(obj => {
             document.getElementById('sorted-records-list').innerHTML += `
             <div class="filas">
-              <p>Name: ${obj.Name}</p>
-              <p>Date: ${obj.Date}</p>
-              <p>Favorite Movie: ${obj['Favorite Movie']}</p>
-              <p>Status: <span onClick="changeStatus('${obj.Name}')">${obj.Status}</span></p>
+              <p>${obj.Name}</p>
+              <p>${obj.Date}</p>
+              <p>${obj['Favorite Food']}</p>
+              <p>${obj['Favorite Movie']}</p>
+              <p><span onClick="changeStatus('${obj.Name}')">${obj.Status}</span></p>
             </div>
           `;
           });
@@ -156,8 +186,8 @@
       </script>
 
       <div style="margin: 80px 0px 140px">
-        <p>Question Required: how you would ask another member of the development team to gain the information needed to be able to complete the task</p>
-        <p>Answer: I would ask a team member of the dev team to provide me with the following information</p>
+        <h4>Question Required: how you would ask another member of the development team to gain the information needed to be able to complete the task</h4>
+        <h4>Answer: I would ask a team member of the dev team to provide me with the following information</h4>
         <ol>
           <li>The main objective of the task and the expected output.</li>
           <li>The language and libraries to use.</li>
@@ -172,6 +202,7 @@
               <li> Git repo to work in</li>
             </ul>
         </ol>
+        <h4> Thanks ! </h4>
       </div>
 
   </body>
