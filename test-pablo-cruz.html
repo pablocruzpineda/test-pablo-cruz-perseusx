@@ -1,0 +1,182 @@
+<!DOCTYPE html >
+  <style>
+    li, span {
+      cursor: pointer;
+    }
+    .filas {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      max-width: 700px;
+    }
+  </style>
+
+  <html>
+    <head>
+      <title>Script Execution test - Pablo Cruz Pineda</title>
+    </head>
+    <body>
+      <h1>Script Execution test - Pablo Cruz Pineda</h1>
+
+    <div id="sorted-records" >
+      <ul>
+        <li onclick="sortByProperty(people, 'Name')">Sort All Records by Name</li>
+        <li onclick="sortByProperty(people, 'Favorite Food')">Sort All Records by Favorite Food</li>
+        <li onclick="sortByProperty(people, 'Favorite Movie')">Sort All Records by Favorite Movie</li>
+        <li onclick="sortByProperty(people, 'Status')">Sort All Records by Status</li>
+        <li onclick="filterRecordsByActive()">Filtered Records by Active Status</li>
+      </ul>
+    
+    </div>
+
+    <div id="sorted-records-list"></div>
+
+      <script>
+
+        /*****
+         * 
+         * Author: [Pablo Cruz Pineda]
+         * Date: [June 19, 2023]
+         * Purpose: [This script adds the date the script was run to each object in an array of objects. 
+         * It then logs the active records with their name, date, and Favorite movie.
+         * It also includes a function to sort the output by object property.
+         * The code was written in Vanilla JavaScript.
+         * I have added a function to change the status of a record by clicking on the status value.
+         * I have added some HTML to display the sorted records and little of CSS.]
+         * 
+         ****/
+
+        let rockyObj = {
+          'Name': 'Rocky',
+          'Favorite Food': 'Sushi',
+          'Favorite Movie': 'Back to The Future',
+          'Status': 'Inactive'
+        };
+
+        let miroslavObj = {
+          'Name': 'Miroslav',
+          'Favorite Food': 'Sushi',
+          'Favorite Movie': 'American Psycho',
+          'Status': 'Active'
+        };
+
+        let donnyObj = {
+          'Name': 'Donny',
+          'Favorite Food': 'Singapore chow mei fun',
+          'Favorite Movie': 'The Princess Bride',
+          'Status': 'Inactive'
+        };
+
+        let mattObj = {
+          'Name': 'Matt',
+          'Favorite Food': 'Brisket Tacos',
+          'Favorite Movie': 'The Princess Bride',
+          'Status': 'Active'
+        };
+
+        // my object added to the list
+        let pabloObj = {
+          'Name': 'Pablo',
+          'Favorite Food': 'Pizza',
+          'Favorite Movie': 'The Matrix',
+          'Status': 'Active'
+        };
+
+        // Array of objects
+        let people = [rockyObj, miroslavObj, donnyObj, mattObj, pabloObj];
+
+
+        // Function to add the date to each object
+        function addDateToObjects(objects) {
+          let currentDate = new Date().toLocaleDateString();
+          for (let i = 0; i < objects.length; i++) {
+            objects[i].Date = currentDate;
+          }
+        }
+
+        // Add the date to each object
+        addDateToObjects(people);
+
+
+        // Filter and log active records with Name, date, and Favorite movie
+        function filterRecordsByActive() {
+          let activeRecords = people.filter(obj => obj.Status === 'Active');
+          if (activeRecords.length > 0) {
+            sortByProperty(activeRecords, 'Name');
+            activeRecords.forEach(obj => {
+              console.log(`Name: ${obj.Name}, Date: ${obj.Date}, Favorite Movie: ${obj['Favorite Movie']}`);
+            });
+          } else {
+            console.log('No active records found by this time.');
+            document.getElementById('sorted-records-list').innerHTML = 'No active records found by this time.';
+          }
+        }
+        filterRecordsByActive();
+
+
+        function changeStatus(name) {
+          let person = people.find(obj => obj.Name === name);
+          if (person.Status === 'Active') {
+            person.Status = 'Inactive';
+          } else {
+            person.Status = 'Active';
+          }
+          console.log(people);
+          sortByProperty(people, 'Name');
+        }
+
+
+        // Function to sort the objects by a given property
+        function sortByProperty(objects, property) {
+          objects.sort((a, b) => (a[property] > b[property]) ? 1 : -1);
+          console.log(objects);
+          document.getElementById('sorted-records-list').innerHTML = '';
+          objects.forEach(obj => {
+            document.getElementById('sorted-records-list').innerHTML += `
+            <div class="filas">
+              <p>Name: ${obj.Name}</p>
+              <p>Date: ${obj.Date}</p>
+              <p>Favorite Movie: ${obj['Favorite Movie']}</p>
+              <p>Status: <span onClick="changeStatus('${obj.Name}')">${obj.Status}</span></p>
+            </div>
+          `;
+          });
+        }
+
+        // Question Required:
+        // how you would ask another member of the development team to gain the information needed to be able to complete the task
+
+        // Answer:
+        // I would ask a team member of the dev team to provide me with the following information
+        // 1. The name of the object property to sort by.
+        // 2. The name of the object property to filter by.
+        // 3. The value of the object property to filter by.
+        // 4. The name of the object properties to log.
+        
+      </script>
+
+      <div style="margin: 80px 0px 140px">
+        <p>Question Required: how you would ask another member of the development team to gain the information needed to be able to complete the task</p>
+        <p>Answer: I would ask a team member of the dev team to provide me with the following information</p>
+        <ol>
+          <li>The main objective of the task and the expected output.</li>
+          <li>The language and libraries to use.</li>
+          <li>The deadline to complete the task.</li>
+          <li>The tech info such as:</li>
+            <ul> 
+              <li>The name of the object property to sort by.</li>
+              <li>The name of the object property to filter by.</li>
+              <li>The value of the object property to filter by.</li>
+              <li>The name of the object properties to log.</li>
+              <li>Design elements to be aware of</li>
+              <li> Git repo to work in</li>
+            </ul>
+        </ol>
+      </div>
+
+  </body>
+</html>
+
+
+
+
