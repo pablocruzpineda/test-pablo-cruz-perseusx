@@ -143,6 +143,7 @@
         filterRecordsByActive();
 
 
+        // Function to change the status from active to inactive and viceversa
         function changeStatus(name) {
           let person = people.find(obj => obj.Name === name);
           if (person.Status === 'Active') {
